@@ -1,31 +1,159 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  /* ─── Color: Brand ──────────────────────────────────────────
+   * Source: Frontend Mentor style guide for the Multi-step form
+   * challenge. Verify these hex values against your Figma/style-guide
+   * assets before finalising.
+   */
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  /* Primary */
+  --color-marine-blue: hsl(213, 96%, 18%);
+  --color-purplish-blue: hsl(243, 100%, 62%);
+  --color-pastel-blue: hsl(228, 100%, 84%);
+  --color-light-blue: hsl(206, 94%, 87%);
+  --color-strawberry-red: hsl(354, 84%, 57%);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Neutral */
+  --color-cool-gray: hsl(231, 11%, 63%);
+  --color-light-gray: hsl(229, 24%, 87%);
+  --color-magnolia: hsl(217, 100%, 97%);
+  --color-alabaster: hsl(231, 100%, 99%);
+  --color-white: hsl(0, 0%, 100%);
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  /* ─── Color: Semantic Aliases ───────────────────────────────
+   * Semantic tokens map raw brand values to their purpose.
+   * Components reference semantic tokens, not raw values.
+   * This means a single change here propagates everywhere.
+   *
+   * Example: if --color-error needs to change from strawberry-red
+   * to something else, you change one line. No component files
+   * need to be touched.
+   */
+
+  /* Text */
+  --color-text-heading: var(--color-marine-blue);
+  --color-text-body: var(--color-cool-gray);
+  --color-text-muted: var(--color-cool-gray);
+  --color-text-on-dark: var(--color-white);
+  --color-text-link: var(--color-purplish-blue);
+
+  /* Surfaces */
+  --color-surface-page: var(--color-magnolia);
+  --color-surface-card: var(--color-white);
+  --color-surface-sidebar: var(--color-marine-blue);
+
+  /* Interactive */
+  --color-interactive-primary: var(--color-marine-blue);
+  --color-interactive-primary-hover: var(--color-purplish-blue);
+  --color-interactive-accent: var(--color-purplish-blue);
+  --color-interactive-selected-bg: var(--color-alabaster);
+  --color-interactive-selected-border: var(--color-purplish-blue);
+
+  /* Form */
+  --color-input-border: var(--color-light-gray);
+  --color-input-border-focus: var(--color-purplish-blue);
+  --color-input-border-error: var(--color-strawberry-red);
+  --color-label: var(--color-marine-blue);
+  --color-placeholder: var(--color-cool-gray);
+
+  /* Feedback */
+  --color-error: var(--color-strawberry-red);
+  --color-error-bg: hsl(354, 84%, 97%);
+
+  /* Focus ring — used in reset.css :focus-visible rule */
+  --color-focus-ring: var(--color-purplish-blue);
+
+  /* ─── Typography ────────────────────────────────────────────
+   * Frontend Mentor specifies Ubuntu as the font for this challenge.
+   * Add the Google Fonts import to index.html, not here, to avoid
+   * a render-blocking @import inside a CSS file.
+   *
+   * <link rel="preconnect" href="https://fonts.googleapis.com">
+   * <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   * <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+   */
+  --font-family-base: "Ubuntu", sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Type scale — unitless values as a base for fluid scaling.
+   * Using rem throughout so type respects the user's browser
+   * font size preference, which is a WCAG baseline requirement.
+   * Never use px for font sizes — it overrides user preferences
+   * and fails WCAG 1.4.4 (Resize Text, Level AA).
+   */
+  --font-size-xs: 0.75rem; /* 12px @ 16px base */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-md: 1.125rem; /* 18px */
+  --font-size-lg: 1.5rem; /* 24px */
+  --font-size-xl: 2rem; /* 32px */
+
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.7;
+
+  /* ─── Spacing ───────────────────────────────────────────────
+   * A consistent spacing scale prevents magic numbers from
+   * appearing throughout your component modules. Reference
+   * these tokens for margin, padding, and gap values.
+   *
+   * Scale is based on a 4px base unit — a common industry convention.
+   */
+  --space-1: 0.25rem; /*  4px */
+  --space-2: 0.5rem; /*  8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+  --space-12: 3rem; /* 48px */
+  --space-16: 4rem; /* 64px */
+
+  /* ─── Layout ────────────────────────────────────────────────
+   * The form card has a fixed max-width on desktop and fills
+   * the full viewport on mobile. These tokens drive the
+   * MultiStepForm layout shell.
+   */
+  --layout-form-max-width: 58rem; /* ~928px */
+  --layout-sidebar-width: 17.5rem; /* ~280px */
+  --layout-content-max-width: 28rem; /* ~448px — constrains step content */
+  --layout-mobile-card-radius: 0.75rem; /* card rounding on mobile */
+
+  /* ─── Border ────────────────────────────────────────────────*/
+  --border-radius-sm: 0.25rem; /*  4px */
+  --border-radius-md: 0.5rem; /*  8px */
+  --border-radius-lg: 0.75rem; /* 12px */
+  --border-radius-full: 9999px; /* pill shape */
+
+  --border-width-base: 1px;
+  --border-width-thick: 2px;
+
+  /* ─── Shadow ─────────────────────────────────────────────── */
+  --shadow-card: 0 1rem 3rem hsl(213, 96%, 18%, 0.08);
+  --shadow-focus: 0 0 0 4px hsl(243, 100%, 62%, 0.25);
+
+  /* ─── Transition ─────────────────────────────────────────── */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* Easing curves for step transitions */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ─── Base Element Styles ───────────────────────────────────────
+ * Apply token values to base elements. Components can override
+ * these, but having sensible base styles means less work per component.
+ */
+
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  color: var(--color-text-body);
+  background-color: var(--color-surface-page);
 }
