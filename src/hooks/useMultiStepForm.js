@@ -11,7 +11,7 @@
  */
 import { useState, useCallback } from 'react';
 
-function useMultiStepForm(stepCount, initialStep = 0) {
+export function useMultiStepForm(stepCount, initialStep = 0) {
   const [currentStep, setCurrentStep] = useState(initialStep);
 
   const [completedSteps, setCompletedSteps] = useState(new Set());
@@ -40,7 +40,7 @@ function useMultiStepForm(stepCount, initialStep = 0) {
   return {
     currentStep, stepNumber, stepCount, completedSteps, isFirstStep, isLastStep, goNext, goBack, goToStep
   };
-  
+
 }
 
-export default useMultiStepForm;
+// export default useMultiStepForm;
